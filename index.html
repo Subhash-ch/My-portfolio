@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portfolio — Subhash Chandra Yadav</title>
+    <!-- NOTE: file name intentionally matches your workspace (style.css) -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="site">
+        <header class="site-header">
+            <div class="header-inner">
+                <a class="logo" href="#">&lt;/&gt; Subhash</a>
+                <nav class="nav">
+                    <a href="#about">About</a>
+                    <a href="#education">Education</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact" class="cta">Contact</a>
+                </nav>
+                <button class="hamburger" aria-label="Open menu" aria-expanded="false"></button>
+            </div>
+        </header>
+
+        <main class="site-main">
+            <section class="hero">
+                <div class="hero-inner container">
+                    <div class="hero-left">
+                        <!-- Replace src with your video file path (keeps autoplay muted loop for avatar feel).
+                 Use small, optimized clips for performance. -->
+                        <div class="avatar-wrap" aria-hidden="true">
+                            <video id="avatarVideo" class="avatar-video" src="Assets/me.mp4" autoplay muted loop
+                                playsinline></video>
+                            <div class="avatar-ring" aria-hidden="true"></div>
+                        </div>
+                    </div>
+
+                    <div class="hero-content">
+                        <h1 class="hero-name">Hi, I'm Subhash Chandra Yadav</h1>
+                        <div class="typing-line" aria-live="polite">
+                            <span id="typed" class="typed"></span><span class="cursor" aria-hidden="true">|</span>
+                        </div>
+
+                        <p class="hero-lead">Building reliable web products with clean code, thoughtful UX, and strong
+                            engineering fundamentals.</p>
+
+                        <div class="hero-ctas">
+                            <a class="btn btn-primary" href="#projects">See projects</a>
+                            <a class="btn btn-ghost" href="Assets/Resume-Subhash.pdf" download>Download resume</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <!-- About Section -->
+
+            <section id="about" class="about container">
+                <div class="about-card">
+                    <div class="about-card-inner">
+                        <div class="about-main">
+                            <h2 class="section-title">About</h2>
+                            <p class="lead">
+                                I am <strong>Subhash Chandra Yadav</strong>, an aspiring software developer focused on
+                                building reliable web products with clean code, thoughtful UX, and strong engineering
+                                fundamentals.
+                            </p>
+                        </div>
+
+                        <div class="about-subcards">
+                            <article class="subcard">
+                                <h4 class="subcard-title">Experience</h4>
+                                <p class="subcard-body">Hands-on with web development, algorithms, and collaborative
+                                    engineering.</p>
+                            </article>
+
+                            <article class="subcard">
+                                <h4 class="subcard-title">Focus Areas</h4>
+                                <p class="subcard-body">Full-stack development, performance, testing, and clean
+                                    architecture.</p>
+                            </article>
+
+                            <article class="subcard">
+                                <h4 class="subcard-title">Looking for</h4>
+                                <p class="subcard-body">Roles in product teams where I can contribute and grow as an
+                                    engineer.</p>
+                            </article>
+                            <article class="subcard">
+                                <h4 class="subcard-title">Strengths</h4>
+                                <p class="subcard-body">Adaptive, detail-oriented, and focused on building maintainable
+                                    systems.</p>
+                            </article>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <section id="education" class="edu-section container" aria-label="Education timeline">
+                <div class="edu-card">
+                    <h2 class="section-title">Education</h2>
+
+                    <div class="edu-timeline" role="list">
+                        <!-- POINT 1: B.Tech (above line date, card below) -->
+                        <div class="edu-point" role="listitem">
+                            <div class="edu-date edu-date-above">2022 - 2026</div>
+
+                            <div class="edu-card-wrap">
+                                <article class="edu-entry subcard" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="edu-summary">
+                                        <strong>Bachelor of Technology</strong>
+                                    </div>
+                                    <div class="edu-details" aria-hidden="true">
+                                        <p class="edu-line"><strong>Stream:</strong> Artificial Intelligence And Machine
+                                            Learning</p>
+                                        <p class="edu-line"><strong>College:</strong> Techno International Newtown</p>
+                                        <p class="edu-line"><strong>CGPA:</strong> 8.03</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+
+                        <!-- POINT 2: Higher Secondary (below line date, card above) -->
+                        <div class="edu-point" role="listitem">
+                            <div class="edu-card-wrap reverse">
+                                <article class="edu-entry subcard" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="edu-summary">
+                                        <strong>Higher Secondary</strong>
+                                    </div>
+                                    <div class="edu-details" aria-hidden="true">
+                                        <p class="edu-line"><strong>Board:</strong> CBSE</p>
+                                        <p class="edu-line"><strong>School:</strong> AGPN Convent & ER School</p>
+                                        <p class="edu-line"><strong>Marks:</strong> 82.5%</p>
+                                    </div>
+                                </article>
+                            </div>
+
+                            <div class="edu-date edu-date-below">2021</div>
+                        </div>
+
+                        <!-- POINT 3: Secondary (above line date, card below) -->
+                        <div class="edu-point" role="listitem">
+                            <div class="edu-date edu-date-above">2019</div>
+
+                            <div class="edu-card-wrap">
+                                <article class="edu-entry subcard" tabindex="0" role="button" aria-expanded="false">
+                                    <div class="edu-summary">
+                                        <strong>Secondary</strong>
+                                    </div>
+                                    <div class="edu-details" aria-hidden="true">
+                                        <p class="edu-line"><strong>Board:</strong> CBSE</p>
+                                        <p class="edu-line"><strong>School:</strong> Kendriya Vidyalaya</p>
+                                        <p class="edu-line"><strong>Marks:</strong> 93%</p>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div> <!-- .edu-timeline -->
+                </div>
+            </section>
+
+
+            <section id="skills" class="skills-section container">
+                <div class="skills-card">
+                    <h2 class="section-title">Skills</h2>
+
+                    <div class="skills-grid" id="skillsGrid">
+                        <!-- CARD 1 -->
+                        <article class="skill-card" data-skill="pl" tabindex="0" aria-expanded="false">
+                            <h3 class="skill-title">Programming Languages</h3>
+
+                            <div class="skill-expanded" aria-hidden="true">
+                                <div class="skill-pool">
+                                    <div class="skill-chip"><img src="Assets/PL/javagif.gif" alt=""><span>Java</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/PL/pythongif.gif"
+                                            alt=""><span>Python</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/PL/C-png.png" alt=""><span>C</span></div>
+                                    <div class="skill-chip"><img src="Assets/PL/kotlin-png.png"
+                                            alt=""><span>Kotlin</span></div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- CARD 2 -->
+                        <article class="skill-card" data-skill="web" tabindex="0" aria-expanded="false">
+                            <h3 class="skill-title">Web Development</h3>
+
+                            <div class="skill-expanded" aria-hidden="true">
+                                <div class="skill-pool">
+                                    <div class="skill-chip"><img src="Assets/WebDev/HTML-png.png" alt=""><span>HTML</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/WebDev/Css-png.png" alt=""><span>CSS</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/WebDev/Javascript-gif.gif"
+                                            alt=""><span>JavaScript</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- CARD 3 -->
+                        <article class="skill-card" data-skill="db" tabindex="0" aria-expanded="false">
+                            <h3 class="skill-title">Databases</h3>
+
+                            <div class="skill-expanded" aria-hidden="true">
+                                <div class="skill-pool">
+                                    <div class="skill-chip"><img src="Assets/Dbs/MySQL-png.png" alt=""><span>MySQL</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/Dbs/MongoDB-png.png" alt=""><span>MongoDB</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- CARD 4 -->
+                        <article class="skill-card" data-skill="tools" tabindex="0" aria-expanded="false">
+                            <h3 class="skill-title">Tools &amp; Technologies</h3>
+
+                            <div class="skill-expanded" aria-hidden="true">
+                                <div class="skill-pool">
+                                    <div class="skill-chip"><img src="Assets/Tools/Git-png.png" alt=""><span>Git</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/Tools/Github-png.png" alt=""><span>GitHub</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/Tools/Linux-gif.gif" alt=""><span>Linux</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/Tools/Docker-png.png" alt=""><span>Docker</span>
+                                    </div>
+                                    <div class="skill-chip"><img src="Assets/Tools/ML-png.png" alt=""><span>Machine Learning</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div> <!-- .skills-grid -->
+                </div> <!-- .skills-card -->
+            </section>
+
+
+            <section id="projects" class="projects-section container">
+                <div class="projects-card">
+                    <h2 class="section-title">Projects</h2>
+
+                    <div class="coming-soon-box">
+                        <p>Coming Soon...</p>
+                    </div>
+                </div>
+            </section>
+
+
+            <section id="contact" class="contact-section container">
+                <div class="contact-card">
+                    <div class="contact-left">
+                        <div class="contact-image">
+                            <!-- Replace src with your image path -->
+                            <img src="Assets/ContactUS.png" alt="Contact image" />
+                        </div>
+                        <h2 class="contact-cta">Let's Connect</h2>
+                    </div>
+
+                    <div class="contact-right">
+                        <form id="contactForm" class="contact-form" novalidate>
+                            <div class="row name-row">
+                                <div class="float-field">
+                                    <input id="firstName" type="text" autocomplete="given-name" />
+                                    <label for="firstName">First name</label>
+                                </div>
+
+                                <div class="float-field">
+                                    <input id="lastName" type="text" autocomplete="family-name" />
+                                    <label for="lastName">Last name</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="float-field full">
+                                    <input id="phone" type="tel" inputmode="tel" />
+                                    <label for="phone">Phone number</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="float-field full">
+                                    <input id="email" type="email" autocomplete="email" />
+                                    <label for="email">Email address</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="float-field full">
+                                    <textarea id="message" rows="5"></textarea>
+                                    <label for="message">Message</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary send-btn full">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="footer-section">
+            <div class="footer-container">
+
+                <p class="footer-text">© 2025 Subhash Chandra Yadav</p>
+
+                <div class="footer-links">
+                    <a href="#" target="_blank" class="footer-link">GitHub</a>
+                    <a href="#" target="_blank" class="footer-link">LinkedIn</a>
+                    <a href="#" target="_blank" class="footer-link">Twitter</a>
+                    <a href="mailto:your@email.com" class="footer-link">Email</a>
+                </div>
+                <p class="footer-text">Made with ❤️ by Subhash</p>
+
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
