@@ -1195,3 +1195,34 @@ html {
     gap: 0.75rem !important;
   }
 }
+
+
+/* Fix spacing between First/Last name fields */
+.name-row.two-col {
+    display: flex;
+    gap: 20px;           /* ← SPACE BETWEEN THEM */
+    width: 100%;
+}
+
+.name-row.two-col .half {
+    width: 100%;         /* ← Ensure equal width */
+}
+
+/* Make all contact input fields same width as Send button */
+.contact-form .row .full,
+.contact-form .row .float-field,
+.contact-form .send-btn.full {
+    width: 100%;
+}
+
+/* Ensure float-field behaves consistently */
+.float-field {
+    flex: 1;
+}
+
+/* Fix input padding and box alignment */
+.float-field input,
+.float-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
