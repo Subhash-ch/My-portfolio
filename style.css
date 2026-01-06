@@ -816,6 +816,11 @@ body {
         text-align: center;
     }
 
+    
+    .typing-line {
+        justify-content: center;
+    }
+
     .hero-left {
         order: 0;
     }
@@ -824,7 +829,6 @@ body {
         order: 1;
     }
 
-   
     .site-header,
     .about-card,
     .edu-card,
