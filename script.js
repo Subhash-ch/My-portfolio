@@ -141,53 +141,131 @@ function initContactForm() {
     if (!form) return;
     const fields = form.querySelectorAll('.float-field');
 
-    // ... (Keep your existing Floating Label Logic here) ...
-    // ... (Keep your existing 'validators', 'setError', 'clearError', 'validateField' functions here) ...
+    // ==========================================
+    // 1. FLOATING LABEL LOGIC (The Fix)
+    // ==========================================
+    fields.forEach(field => {
+        const input = field.querySelector('input, textarea');
+        if (!input) return;
 
-    // --- NEW SUBMIT LOGIC ---
+        // Function to check if field has text
+        const checkInput = () => {
+            if (input.value.trim() !== '') {
+                field.classList.add('filled');
+            } else {
+                field.classList.remove('filled');
+            }
+        };
+
+        // Run immediately (for autofill)
+        checkInput();
+
+        // Run when typing
+        input.addEventListener('input', checkInput);
+        
+        // Handle visual focus state
+        input.addEventListener('focus', () => field.classList.add('focused'));
+        input.addEventListener('blur', () => {
+            field.classList.remove('focused');
+            checkInput(); // Double check on blur
+            validateField(field); // Run validation
+        });
+    });
+
+    // ==========================================
+    // 2. VALIDATION LOGIC
+    // ==========================================
+    const validators = {
+        email: (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s),
+        phone: (s) => /^[0-9]{7,15}$/.test(s.replace(/[\s()-]/g, '')),
+        default: (s) => !!s
+    };
+
+    function setError(field, msg) {
+        let err = field.querySelector('.field-error');
+        if (!err) {
+            err = document.createElement('div');
+            err.className = 'field-error';
+            field.appendChild(err);
+        }
+        err.textContent = msg;
+        field.classList.add('has-error');
+    }
+
+    function clearError(field) {
+        const err = field.querySelector('.field-error');
+        if (err) err.remove();
+        field.classList.remove('has-error');
+    }
+
+    function validateField(field) {
+        const input = field.querySelector('input, textarea');
+        if (!input) return true;
+        
+        const val = input.value.trim();
+        const id = input.id || '';
+        const name = input.name || '';
+        
+        clearError(field);
+
+        if (!val) {
+            setError(field, 'Required.');
+            return false;
+        }
+        if ((name === 'user_email' || id === 'email') && !validators.email(val)) {
+            setError(field, 'Invalid email.');
+            return false;
+        }
+        if ((name === 'contact_number' || id === 'phone') && !validators.phone(val)) {
+            setError(field, 'Invalid phone number.');
+            return false;
+        }
+        return true;
+    }
+
+    // ==========================================
+    // 3. SENDING LOGIC (EmailJS + Recaptcha)
+    // ==========================================
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // 1. Validate Text Fields
+        // Validate all fields first
         const valid = Array.from(fields).map(validateField).every(Boolean);
         if (!valid) {
-            const first = form.querySelector('.has-error input, .has-error textarea');
-            if (first) first.focus();
+            const firstInvalid = form.querySelector('.has-error input, .has-error textarea');
+            if (firstInvalid) firstInvalid.focus();
             return;
         }
 
-        // 2. Validate reCAPTCHA
+        // Validate Captcha
         const captchaResponse = grecaptcha.getResponse();
         if (captchaResponse.length === 0) {
             alert("Please verify you are not a robot.");
             return;
         }
 
-        // 3. Prepare Button State
+        // Send Email
         const btn = form.querySelector('button[type="submit"]');
         const originalText = btn.textContent;
         btn.disabled = true;
         btn.textContent = 'Sending...';
 
-        // 4. Send via EmailJS
-        
+        // REPLACE WITH YOUR ACTUAL IDs
         emailjs.sendForm('service_fqf68z3', 'template_eqwy5ig', form)
             .then(() => {
-                // SUCCESS
                 btn.textContent = 'Message Sent! ✓';
                 form.reset();
-                grecaptcha.reset(); // Reset captcha for next use
-                fields.forEach(f => f.classList.remove('filled'));
+                grecaptcha.reset();
+                fields.forEach(f => f.classList.remove('filled')); // Reset labels
                 
                 setTimeout(() => {
                     btn.disabled = false;
                     btn.textContent = originalText;
                 }, 3000);
             }, (error) => {
-                // ERROR
                 console.error('FAILED...', error);
                 btn.textContent = 'Failed. Try again.';
-                alert("Failed to send message. Please check your internet or try again later.");
+                alert("Failed to send. Please try again later.");
                 
                 setTimeout(() => {
                     btn.disabled = false;
