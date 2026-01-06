@@ -14,7 +14,7 @@ function initYear() {
 }
 
 function initTyping() {
-    const words = ["Aspiring Software Developer", "Full-Stack Web Developer", "Problem Solver", "Data Structures & Algorithms", "Open-Source Contributor"];
+    const words = ["Aspiring Software Developer", "Full-Stack Web Developer", "Problem Solver", "Open-Source Contributor"];
     const typedEl = document.getElementById('typed');
     if (typedEl) startTyping(typedEl, words, 120, 60, 900);
 }
