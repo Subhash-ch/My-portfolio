@@ -96,15 +96,24 @@ body {
 }
 
 .hamburger {
-    display: none;
-    width: 40px;
-    height: 40px;
+    display: none; /* Hidden on desktop, shown on mobile */
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
-    background: transparent;
-    border: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
     cursor: pointer;
+    
+    /* This draws the 3 lines (Icon) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6eef3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='4' y1='12' x2='20' y2='12'%3E%3C/line%3E%3Cline x1='4' y1='6' x2='20' y2='6'%3E%3C/line%3E%3Cline x1='4' y1='18' x2='20' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px;
+    transition: background-color 0.2s;
 }
-
+.hamburger:active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 /* Hero Section */
 .hero {
     padding: clamp(2rem, 6vw, 6rem) 0;
@@ -841,16 +850,60 @@ body {
 }
 
 @media (max-width: 600px) {
+    
     .hero {
         padding: 1.5rem 0 0.5rem 0 !important;
     }
 
+    
     #about {
-        margin-top: 0.5rem !important;
+        margin-top: 0 !important;
+        padding-top: 0 !important; 
     }
 
+   
     .name-row {
         flex-direction: column;
         gap: 0.75rem;
     }
+}
+
+@media (max-width: 760px) {
+    
+    .nav {
+        display: none; 
+        position: absolute;
+        top: 100%; 
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: #0e2433; /* Solid background color */
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        padding: 1rem;
+        align-items: stretch; /* Full width links */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* 2. Style for when menu is OPEN */
+    .nav.active {
+        display: flex;
+        animation: slideDown 0.2s ease-out;
+    }
+
+    /* 3. Ensure links are easy to tap */
+    .nav a {
+        padding: 12px;
+        text-align: center;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.02);
+    }
+    
+    .hamburger { display: block; } /* Show icon */
+    
+    /* ... keep your other mobile fixes here ... */
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

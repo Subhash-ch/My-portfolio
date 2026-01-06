@@ -5,7 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Portfolio — Subhash Chandra Yadav</title>
-    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+
+            emailjs.init("MI1cFw4Cm_v6_K4NP");
+        })();
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -29,7 +37,7 @@
             <section class="hero">
                 <div class="hero-inner container">
                     <div class="hero-left">
-                        
+
                         <div class="avatar-wrap" aria-hidden="true">
                             <video id="avatarVideo" class="avatar-video" src="Assets/me.mp4" autoplay muted loop
                                 playsinline></video>
@@ -276,12 +284,12 @@
                         <form id="contactForm" class="contact-form" novalidate>
                             <div class="row name-row two-col">
                                 <div class="float-field half">
-                                    <input id="firstName" type="text" autocomplete="given-name" />
+                                    <input id="firstName" name="first_name" type="text" autocomplete="given-name" />
                                     <label for="firstName">First name</label>
                                 </div>
 
                                 <div class="float-field half">
-                                    <input id="lastName" type="text" autocomplete="family-name" />
+                                    <input id="lastName" name="last_name" type="text" autocomplete="family-name" />
                                     <label for="lastName">Last name</label>
                                 </div>
                             </div>
@@ -289,23 +297,31 @@
 
                             <div class="row">
                                 <div class="float-field full">
-                                    <input id="phone" type="tel" inputmode="tel" />
+                                    <input id="phone" name="contact_number" type="tel" inputmode="tel" />
                                     <label for="phone">Phone number</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="float-field full">
-                                    <input id="email" type="email" autocomplete="email" />
+                                    <input id="email" name="user_email" type="email" autocomplete="email" />
                                     <label for="email">Email address</label>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="float-field full">
-                                    <textarea id="message" rows="5"></textarea>
+                                    <textarea id="message" name="user_message" rows="5"></textarea>
                                     <label for="message">Message</label>
                                 </div>
+                            </div>
+
+                            <div class="row" style="margin-bottom: 1rem; justify-content: center;">
+                                <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+                            </div>
+
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary send-btn full">Send</button>
                             </div>
 
                             <div class="row">
@@ -319,7 +335,7 @@
 
         </main>
 
-            <!-- Footer -->
+        <!-- Footer -->
         <footer class="footer-section">
             <div class="footer-container">
 

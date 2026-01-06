@@ -141,48 +141,93 @@ function initContactForm() {
     if (!form) return;
     const fields = form.querySelectorAll('.float-field');
 
-    fields.forEach(field => {
-        const input = field.querySelector('input, textarea');
-        if (!input) return;
-        const sync = () => field.classList.toggle('filled', !!input.value.trim());
-        sync();
-        input.addEventListener('input', sync);
-        input.addEventListener('focus', () => field.classList.add('focused'));
-        input.addEventListener('blur', () => { field.classList.remove('focused'); validateField(field); });
-    });
+    // ... (Keep your existing Floating Label Logic here) ...
+    // ... (Keep your existing 'validators', 'setError', 'clearError', 'validateField' functions here) ...
 
-    const validators = {
-        email: (s) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s),
-        phone: (s) => /^[0-9]{7,15}$/.test(s.replace(/[\s()-]/g, '')),
-        default: (s) => !!s
-    };
-
-    function setError(field, msg) {
-        let err = field.querySelector('.field-error');
-        if (!err) { err = document.createElement('div'); err.className = 'field-error'; field.appendChild(err); }
-        err.textContent = msg; field.classList.add('has-error');
-    }
-    function clearError(field) {
-        const err = field.querySelector('.field-error'); if (err) err.remove(); field.classList.remove('has-error');
-    }
-    function validateField(field) {
-        const input = field.querySelector('input, textarea');
-        if (!input) return true;
-        const val = input.value.trim(); const id = input.id || '';
-        clearError(field);
-        if (!val) { setError(field, 'Required.'); return false; }
-        if (id === 'email' && !validators.email(val)) { setError(field, 'Invalid email.'); return false; }
-        if (id === 'phone' && !validators.phone(val)) { setError(field, 'Invalid phone.'); return false; }
-        return true;
-    }
-
+    // --- NEW SUBMIT LOGIC ---
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const valid = Array.from(fields).map(validateField).every(Boolean);
-        if (!valid) { const first = form.querySelector('.has-error input, .has-error textarea'); if (first) first.focus(); return; }
 
+        // 1. Validate Text Fields
+        const valid = Array.from(fields).map(validateField).every(Boolean);
+        if (!valid) {
+            const first = form.querySelector('.has-error input, .has-error textarea');
+            if (first) first.focus();
+            return;
+        }
+
+        // 2. Validate reCAPTCHA
+        const captchaResponse = grecaptcha.getResponse();
+        if (captchaResponse.length === 0) {
+            alert("Please verify you are not a robot.");
+            return;
+        }
+
+        // 3. Prepare Button State
         const btn = form.querySelector('button[type="submit"]');
-        btn.disabled = true; btn.textContent = 'Sent ✓';
-        setTimeout(() => { btn.disabled = false; btn.textContent = 'Send'; form.reset(); fields.forEach(f => f.classList.remove('filled')); }, 1500);
+        const originalText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        // 4. Send via EmailJS
+        
+        emailjs.sendForm('service_fqf68z3', 'template_eqwy5ig', form)
+            .then(() => {
+                // SUCCESS
+                btn.textContent = 'Message Sent! ✓';
+                form.reset();
+                grecaptcha.reset(); // Reset captcha for next use
+                fields.forEach(f => f.classList.remove('filled'));
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }, 3000);
+            }, (error) => {
+                // ERROR
+                console.error('FAILED...', error);
+                btn.textContent = 'Failed. Try again.';
+                alert("Failed to send message. Please check your internet or try again later.");
+                
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = originalText;
+                }, 3000);
+            });
     });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    initMobileMenu();
+});
+
+function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const nav = document.querySelector('.nav');
+    const links = document.querySelectorAll('.nav a'); // Select all nav links
+
+    if (hamburger && nav) {
+        // Toggle menu on click
+        hamburger.addEventListener('click', () => {
+            const isActive = nav.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isActive);
+        });
+
+        // Close menu when a link is clicked
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && !hamburger.contains(e.target) && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 }
